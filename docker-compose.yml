@@ -1,6 +1,34 @@
 version: '3.7'
 
 services:
+  web:
+    container_name: parser.web
+    build:
+      context: docker/web/
+    restart: on-failure
+    ports:
+      - ${WEB_API_PORT:-8899}:80
+    volumes:
+      - ./public:/app/public
+    env_file:
+      - .env
+    depends_on:
+      - php
+    networks:
+      - parser-network
+
+  php:
+    container_name: parser.php-fpm
+    build:
+      context: docker/php-fpm/
+    restart: on-failure
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    networks:
+      - parser-network
+
   elasticsearch:
     container_name: parser.elasticsearch
     build:
@@ -66,7 +94,7 @@ services:
     env_file:
       - .env
     environment:
-      ELASTICSEARCH_HOSTS: '["http://elasticsearch:9200"]'
+      ELASTICSEARCH_HOSTS: '["http://elasticsearch:${ELASTIC_PORT:-9200}"]'
     networks:
       - parser-network
     depends_on:
