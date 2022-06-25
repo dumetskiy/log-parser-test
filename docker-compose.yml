@@ -1,0 +1,80 @@
+version: '3.7'
+
+services:
+  elasticsearch:
+    container_name: parser.elasticsearch
+    build:
+      context: docker/elasticsearch/
+      args:
+        STACK_VERSION: $STACK_VERSION
+    volumes:
+      - type: bind
+        source: ./docker/elasticsearch/config/elasticsearch.yml
+        target: /usr/share/elasticsearch/config/elasticsearch.yml
+        read_only: true
+      - type: volume
+        source: elasticsearch
+        target: /usr/share/elasticsearch/data
+    ports:
+      - ${ELASTIC_PORT:-9200}:9200
+    environment:
+      discovery.type: single-node
+      xpack.license.self_generated.type: ${LICENSE}
+    env_file:
+      - .env
+    networks:
+      - parser-network
+
+  logstash:
+    container_name: parser.logstash
+    build:
+      context: docker/logstash/
+      args:
+        STACK_VERSION: $STACK_VERSION
+    volumes:
+      - type: bind
+        source: ./docker/logstash/config/logstash.yml
+        target: /usr/share/logstash/config/logstash.yml
+        read_only: true
+      - type: bind
+        source: ./docker/logstash/pipeline
+        target: /usr/share/logstash/pipeline
+        read_only: true
+    ports:
+      - ${LOGSTASH_PORT_INPUT_JSON:-5010}:5010
+      - ${LOGSTASH_PORT_INPUT_RAW:-5020}:5020
+    env_file:
+      - .env
+    networks:
+      - parser-network
+    depends_on:
+      - elasticsearch
+
+  kibana:
+    container_name: parser.kibana
+    build:
+      context: docker/kibana/
+      args:
+        STACK_VERSION: $STACK_VERSION
+    volumes:
+      - type: bind
+        source: ./docker/kibana/config/kibana.yml
+        target: /usr/share/kibana/config/kibana.yml
+        read_only: true
+    ports:
+      - ${KIBANA_PORT:-5601}:5601
+    env_file:
+      - .env
+    environment:
+      ELASTICSEARCH_HOSTS: '["http://elasticsearch:9200"]'
+    networks:
+      - parser-network
+    depends_on:
+      - elasticsearch
+
+networks:
+  parser-network:
+    driver: bridge
+
+volumes:
+  elasticsearch:

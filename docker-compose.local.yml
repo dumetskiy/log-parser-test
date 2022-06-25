@@ -1,0 +1,12 @@
+version: "2.2"
+
+services:
+  elasticsearch:
+    env_file:
+      - .env.local
+  logstash:
+    env_file:
+      - .env.local
+  kibana:
+    env_file:
+      - .env.local

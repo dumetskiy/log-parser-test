@@ -1,0 +1,7 @@
+# Fetch all from Elastica index
+GET http://localhost:{{elastica-port}}/{{logs-index-name}}/_search
+###
+
+# Delete Elastica index
+DELETE http://localhost:{{elastica-port}}/{{logs-index-name}}
+###
