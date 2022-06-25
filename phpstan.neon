@@ -1,0 +1,14 @@
+includes:
+    - vendor/phpstan/phpstan/conf/bleedingEdge.neon
+    - vendor/phpstan/phpstan-symfony/extension.neon
+    - vendor/phpstan/phpstan-phpunit/extension.neon
+    - vendor/phpstan/phpstan-deprecation-rules/rules.neon
+
+parameters:
+    level: 3
+    fileExtensions: [php]
+    paths:
+        - src
+    excludePaths:
+        - src/tests/*
+    inferPrivatePropertyTypeFromConstructor: true

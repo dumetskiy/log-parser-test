@@ -12,6 +12,13 @@
     "symfony/runtime": "6.1.*",
     "symfony/yaml": "6.1.*"
   },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "dev-master",
+    "phpstan/phpstan": "1.7.x-dev",
+    "phpstan/phpstan-deprecation-rules": "1.1.x-dev",
+    "phpstan/phpstan-phpunit": "1.1.x-dev",
+    "phpstan/phpstan-symfony": "1.2.x-dev"
+  },
   "config": {
     "optimize-autoloader": true,
     "preferred-install": {
@@ -45,7 +52,8 @@
       "@auto-scripts"
     ],
     "cs-fix": "./bin/php-cs-fix",
-    "cs-check": "./bin/php-cs-check"
+    "cs-check": "./bin/php-cs-check",
+    "phpstan-analyse": "./bin/phpstan-analyse"
   },
   "conflict": {
     "symfony/symfony": "*"
@@ -55,8 +63,5 @@
       "allow-contrib": false,
       "require": "6.1.*"
     }
-  },
-  "require-dev": {
-    "friendsofphp/php-cs-fixer": "dev-master"
   }
 }
