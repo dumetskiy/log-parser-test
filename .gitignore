@@ -3,6 +3,8 @@
 
 # Application
 .env.*
+data
+!data/sample_log.txt
 
 # Symfony
 /var/

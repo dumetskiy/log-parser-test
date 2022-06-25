@@ -5,12 +5,14 @@
   "minimum-stability": "dev",
   "require": {
     "php": ">=8.1",
-    "symfony/console": "6.1.*",
-    "symfony/dotenv": "6.1.*",
+    "symfony/console": "6.2.*",
+    "symfony/dotenv": "6.2.*",
+    "symfony/finder": "6.2.*",
     "symfony/flex": "2.2.*",
-    "symfony/framework-bundle": "6.1.*",
-    "symfony/runtime": "6.1.*",
-    "symfony/yaml": "6.1.*"
+    "symfony/framework-bundle": "6.2.*",
+    "symfony/monolog-bundle": "3.x-dev",
+    "symfony/runtime": "6.2.*",
+    "symfony/yaml": "6.2.*"
   },
   "require-dev": {
     "friendsofphp/php-cs-fixer": "dev-master",
@@ -61,7 +63,7 @@
   "extra": {
     "symfony": {
       "allow-contrib": false,
-      "require": "6.1.*"
+      "require": "6.2.*"
     }
   }
 }
