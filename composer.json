@@ -43,7 +43,9 @@
     ],
     "post-update-cmd": [
       "@auto-scripts"
-    ]
+    ],
+    "cs-fix": "./bin/php-cs-fix",
+    "cs-check": "./bin/php-cs-check"
   },
   "conflict": {
     "symfony/symfony": "*"
@@ -53,5 +55,8 @@
       "allow-contrib": false,
       "require": "6.1.*"
     }
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "dev-master"
   }
 }

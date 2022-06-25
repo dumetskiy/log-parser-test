@@ -1,5 +1,13 @@
+# IDE
 .idea
+
+# Application
 .env.*
-/public/bundles/
+
+# Symfony
 /var/
 /vendor/
+
+# PHP-cs-fixer
+.php-cs-fixer.php
+.php-cs-fixer.cache

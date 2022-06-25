@@ -1,0 +1,2 @@
+#!/bin/sh
+vendor/bin/php-cs-fixer fix --allow-risky=yes --diff --verbose --dry-run
