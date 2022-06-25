@@ -66,6 +66,6 @@ class FileSystemUtils
 
     private static function buildAbsolutePath(string $relativePath): string
     {
-        return dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . $relativePath;
+        return dirname(__DIR__, 2) . \DIRECTORY_SEPARATOR . $relativePath;
     }
 }

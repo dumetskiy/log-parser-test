@@ -8,5 +8,5 @@ use LogParser\Exception\LogParserException;
 
 class CommandInputException extends LogParserException
 {
-    private static string $defaultMessage = 'Command input error occurred';
+    protected static string $defaultMessage = 'Command input error occurred';
 }

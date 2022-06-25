@@ -19,6 +19,7 @@ return (new PhpCsFixer\Config())
             'sort_algorithm' => 'none',
         ],
         'no_superfluous_phpdoc_tags' => false,
+        'braces' => false,
         'phpdoc_align' => false,
         'blank_line_before_statement' => [
             'statements' => [

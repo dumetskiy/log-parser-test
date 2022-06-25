@@ -27,7 +27,6 @@ use Symfony\Component\DependencyInjection\Attribute\Autowire;
 )]
 class ParseLogCommand extends Command
 {
-
     public function __construct(
         #[Autowire(service: 'log_parser.configuration')]
         readonly private ParserConfiguration $parserConfiguration,
