@@ -40,7 +40,6 @@ class ParseLogCommand extends Command
 
     protected function configure(): void
     {
-        $this->logger->info('Log parsing command started...');
         $logsDirectory = $this->parserConfiguration->logsDirectory;
 
         $this
@@ -77,7 +76,7 @@ class ParseLogCommand extends Command
                 processingStrategyHandle: $input->getOption(Option::LOG_PROCESSING_STRATEGY->value),
                 offset: (int) $input->getOption(Option::OFFSET_LINES->value),
             );
-            $this->logger->info('Configuration gathered successfully!');
+            $this->logger->notice('Configuration gathered successfully!');
 
             $this->logParseOperationProcessor->process($operationConfiguration);
 

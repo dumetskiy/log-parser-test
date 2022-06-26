@@ -22,6 +22,11 @@ class LogBatchConfiguration
         $this->stopwatch = new Stopwatch();
     }
 
+    public function getBatchEndLine(): int
+    {
+        return $this->startLine + $this->linesCount;
+    }
+
     public function startStopWatch(): void
     {
         $this->stopwatch->start($this->getStopWatchHandle());

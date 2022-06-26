@@ -14,7 +14,6 @@ use Psr\Log\LoggerInterface;
 #[LogProcessingHandler(LogProcessingStrategy::PARSE_AND_PROXY, 1)]
 class JsonLogNormalizationHandler implements LogProcessingHandlerInterface
 {
-
     public function __construct(
         readonly private LoggerInterface $logger,
         readonly private LogLineParser $logLineParser
@@ -22,8 +21,8 @@ class JsonLogNormalizationHandler implements LogProcessingHandlerInterface
 
     public function __invoke(LogBatchConfiguration $logBatchConfiguration): void
     {
-        $this->logger->notice('Transforming raw logs into JSON...');
-        $rawLogLines = explode(PHP_EOL, $logBatchConfiguration->logLines);
+        $this->logger->info('Transforming raw logs into JSON...');
+        $rawLogLines = explode(\PHP_EOL, $logBatchConfiguration->logLines);
         $normalizedJsonLines = '';
 
         foreach ($rawLogLines as $rawLogLine) {
@@ -33,10 +32,10 @@ class JsonLogNormalizationHandler implements LogProcessingHandlerInterface
                 continue;
             }
 
-            $normalizedJsonLines .= $jsonLogLine . PHP_EOL;
+            $normalizedJsonLines .= $jsonLogLine . \PHP_EOL;
         }
 
-        $normalizedJsonLines = rtrim($normalizedJsonLines, PHP_EOL);
+        $normalizedJsonLines = rtrim($normalizedJsonLines, \PHP_EOL);
         $logBatchConfiguration->logLines = $normalizedJsonLines;
     }
 
@@ -51,7 +50,7 @@ class JsonLogNormalizationHandler implements LogProcessingHandlerInterface
 
             return json_encode(
                 $logLineData,
-                JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR
+                \JSON_UNESCAPED_SLASHES | \JSON_UNESCAPED_UNICODE | \JSON_THROW_ON_ERROR
             );
         } catch (LogParserException) {
             $this->logger->warning(sprintf(

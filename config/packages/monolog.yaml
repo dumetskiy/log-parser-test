@@ -13,6 +13,7 @@ monolog:
             type: console
             process_psr_3_messages: true
             level: info
-            channels: ["!event", "!console"]
+            channels: ["!event", "!console", "!http_client"]
             verbosity_levels:
-                VERBOSITY_NORMAL: INFO
+                VERBOSITY_NORMAL: NOTICE
+                VERBOSITY_VERBOSE: INFO

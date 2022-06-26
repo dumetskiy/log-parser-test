@@ -19,7 +19,7 @@ class InitProcessingHandler implements LogProcessingHandlerInterface
 
     public function __invoke(LogBatchConfiguration $logBatchConfiguration): void
     {
-        $this->logger->notice(sprintf(
+        $this->logger->info(sprintf(
             'Started processing chunk %d [lines %d - %d]...',
             $logBatchConfiguration->batchId,
             $logBatchConfiguration->startLine,

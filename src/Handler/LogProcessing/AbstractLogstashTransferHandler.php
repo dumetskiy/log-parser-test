@@ -27,9 +27,9 @@ abstract class AbstractLogstashTransferHandler implements LogProcessingHandlerIn
     public function __invoke(LogBatchConfiguration $logBatchConfiguration): void
     {
         try {
-            $this->logger->notice('Sending logs batch data to LogStash...');
+            $this->logger->info('Sending logs batch data to LogStash...');
             $requestOptions = [
-                'body' => $logBatchConfiguration->logLines
+                'body' => $logBatchConfiguration->logLines,
             ];
 
             $this->prepareRequestOptions($requestOptions);
