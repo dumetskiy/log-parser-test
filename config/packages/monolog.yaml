@@ -1,17 +1,18 @@
 monolog:
     channels:
         - deprecation
+    handlers:
+        main:
+            type: stream
+            path: "%kernel.logs_dir%/log-parser.%kernel.environment%.log"
+            level: debug
+            channels: ["!event"]
 
-when@dev:
-    monolog:
-        handlers:
-            main:
-                type: stream
-                path: "%kernel.logs_dir%/%kernel.environment%.log"
-                level: debug
-                channels: ["!event"]
-            console:
-                type: console
-                process_psr_3_messages: true
-                level: info
-                channels: ["!event", "!console"]
+        # Configuring logger to output logs into console even with a normal verbosity level
+        console:
+            type: console
+            process_psr_3_messages: true
+            level: info
+            channels: ["!event", "!console"]
+            verbosity_levels:
+                VERBOSITY_NORMAL: INFO

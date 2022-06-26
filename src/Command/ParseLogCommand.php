@@ -9,6 +9,7 @@ use LogParser\Enum\Command\Option;
 use LogParser\Enum\LogProcessingStrategy;
 use LogParser\Exception\LogParserException;
 use LogParser\Factory\ValueObject\ParseConfigurationFactory;
+use LogParser\Processor\LogParseOperationProcessor;
 use LogParser\Utils\FileSystemUtils;
 use LogParser\ValueObject\ParserConfiguration;
 use Psr\Log\LoggerInterface;
@@ -31,6 +32,7 @@ class ParseLogCommand extends Command
         #[Autowire(service: 'log_parser.configuration')]
         readonly private ParserConfiguration $parserConfiguration,
         readonly private ParseConfigurationFactory $operationConfigurationFactory,
+        readonly private LogParseOperationProcessor $logParseOperationProcessor,
         readonly private LoggerInterface $logger,
     ) {
         parent::__construct();
@@ -75,20 +77,16 @@ class ParseLogCommand extends Command
                 processingStrategyHandle: $input->getOption(Option::LOG_PROCESSING_STRATEGY->value),
                 offset: (int) $input->getOption(Option::OFFSET_LINES->value),
             );
-            $this->logger->info('Configuration gathered successfully');
-            $this->logger->notice(sprintf(
-                'Parsing file "%s" with offset %d and strategy "%s"',
-                $operationConfiguration->logFile->getFilename(),
-                $operationConfiguration->offset,
-                $operationConfiguration->processingStrategy->value
-            ));
+            $this->logger->info('Configuration gathered successfully!');
+
+            $this->logParseOperationProcessor->process($operationConfiguration);
 
             return self::SUCCESS;
         } catch (LogParserException $exception) {
             $this->logger->error($exception->getMessage());
         } catch (\Throwable $throwable) {
             throw $throwable;
-            $output->writeln('Unhandled error occurred');
+            $this->logger->error('Unhandled error occurred');
         }
 
         return self::FAILURE;

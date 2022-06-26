@@ -5,6 +5,9 @@ services:
     _defaults:
         autowire: true
         autoconfigure: true
+    _instanceof:
+        LogParser\Handler\LogProcessing\LogProcessingHandlerInterface:
+            tags: ['log_parser.processing.handler']
 
     LogParser\:
         resource: '../src/'
