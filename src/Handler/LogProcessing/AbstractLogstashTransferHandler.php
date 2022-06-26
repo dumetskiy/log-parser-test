@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace LogParser\Handler\LogProcessing;
 
-use LogParser\Attribute\LogProcessingHandler;
-use LogParser\Enum\LogProcessingStrategy;
 use LogParser\ValueObject\LogBatchConfiguration;
 use Psr\Log\LoggerInterface;
 

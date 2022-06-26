@@ -38,7 +38,7 @@ class LogHandlerStackFactoryCompilerPass implements CompilerPassInterface
                 $handlerStackFactoryDefinition->addMethodCall('pushStackHandler', [
                     new Reference($handlerId, ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE),
                     $attribute->executionOrder,
-                    $attribute->logProcessingStrategy
+                    $attribute->logProcessingStrategy,
                 ]);
             }
         }

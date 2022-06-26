@@ -29,14 +29,14 @@ class LogBatchConfigurationFactory
         $batchContent = '';
         $reachedEof = false;
 
-        while($logLine = $logFile->fgets() !== false) {
+        while ($logLine = false !== $logFile->fgets()) {
             if ($logFile->eof()) {
                 $reachedEof = true;
 
                 break;
             }
 
-            $batchContent .= $logLine . PHP_EOL;
+            $batchContent .= $logLine . \PHP_EOL;
 
             if ($batchLinesCount++ >= $batchLinesLimit) {
                 break;
@@ -45,7 +45,7 @@ class LogBatchConfigurationFactory
 
         return new LogBatchConfiguration(
             parseOperationConfiguration: $currentBatch->parseOperationConfiguration,
-            batchId: ++$currentBatch->batchId,
+            batchId: $currentBatch->batchId + 1,
             startLine: $currentBatch->startLine + $currentBatch->linesCount,
             linesCount: $batchLinesCount,
             logLines: $batchContent,
