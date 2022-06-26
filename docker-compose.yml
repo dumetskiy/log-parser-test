@@ -69,7 +69,7 @@ services:
         target: /usr/share/logstash/pipeline
         read_only: true
     ports:
-      - ${LOGSTASH_PORT_INPUT:-5010}:5010
+      - ${LOGSTASH_PORT:-5010}:5010
     env_file:
       - .env
     networks:

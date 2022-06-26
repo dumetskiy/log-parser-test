@@ -8,7 +8,7 @@ use LogParser\Attribute\LogProcessingHandler;
 use LogParser\Enum\HttpHeaderValue;
 use LogParser\Enum\LogProcessingStrategy;
 
-#[LogProcessingHandler(LogProcessingStrategy::PARSE_AND_PROXY, 1)]
+#[LogProcessingHandler(LogProcessingStrategy::PARSE_AND_PROXY, 2)]
 class JsonLogstashTransferHandler extends AbstractLogstashTransferHandler
 {
     public function prepareRequestOptions(array &$options): void

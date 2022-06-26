@@ -7,6 +7,7 @@ namespace LogParser\Processor;
 use LogParser\Factory\Stack\LogHandlerStackFactory;
 use LogParser\Factory\ValueObject\LogBatchConfigurationFactory;
 use LogParser\Handler\LogProcessing\LogProcessingHandlerInterface;
+use LogParser\ValueObject\LogBatchConfiguration;
 use LogParser\ValueObject\ParseOperationConfiguration;
 use LogParser\ValueObject\ParserConfiguration;
 use Psr\Log\LoggerInterface;
@@ -43,8 +44,8 @@ class LogParseOperationProcessor
                 $this->parserConfiguration->batchSize
             );
 
-            if ($logBatchConfiguration->reachedEof || empty($logBatchConfiguration->logLines)) {
-                $this->logger->warning('End of file reached, aborting...');
+            if (!$logBatchConfiguration instanceof LogBatchConfiguration || empty($logBatchConfiguration->logLines)) {
+                break;
             }
 
             /** @var LogProcessingHandlerInterface $logHandler */
@@ -53,5 +54,7 @@ class LogParseOperationProcessor
                 $logHandler($logBatchConfiguration);
             }
         } while (!$logBatchConfiguration->reachedEof);
+
+        $this->logger->warning('End of file reached, aborting...');
     }
 }

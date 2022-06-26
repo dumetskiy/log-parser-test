@@ -30,7 +30,9 @@ class LogHandlerStackFactoryCompilerPass implements CompilerPassInterface
             $handlerDefinition = $container->getDefinition($handlerId);
             $handlerClassReflection = new \ReflectionClass($handlerDefinition->getClass());
 
-            foreach ($handlerClassReflection->getAttributes() as $attribute) {
+            foreach ($handlerClassReflection->getAttributes() as $attributeReflection) {
+                $attribute = $attributeReflection->newInstance();
+
                 if (!$attribute instanceof LogProcessingHandler) {
                     continue;
                 }

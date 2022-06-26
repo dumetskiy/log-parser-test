@@ -1,8 +1,10 @@
 # POST JSON data trough Logstash
 POST http://localhost:{{logstash-port-input}}
-Content-Type: application/json
+Content-Type: application/json-lines
 
-{ "service" : "1USER-SERVICE", "datetime" : "17/Aug/2021:09:21:53 +0000", "content" : "POST /users HTTP/1.1", "httpcode" : 201}
+{ "service_name" : "1USER-SERVICE", "date_time" : "17/Aug/2021:09:21:53 +0000", "http_code" : 201}
+{ "service_name" : "1USER-SERVICE", "date_time" : "17/Aug/2021:09:21:53 +0000", "http_code" : 201}
+{ "service_name" : "1USER-SERVICE", "date_time" : "17/Aug/2021:09:21:53 +0000", "http_code" : 201}
 ###
 
 # POST RAW data trough Logstash

@@ -23,22 +23,30 @@ class LogBatchConfigurationFactory
     public function fetchNextLogBatch(
         LogBatchConfiguration $currentBatch,
         int $batchLinesLimit
-    ): LogBatchConfiguration {
+    ): ?LogBatchConfiguration {
         $batchLinesCount = 0;
         $logFile = $currentBatch->parseOperationConfiguration->logFile;
         $batchContent = '';
         $reachedEof = false;
 
-        while ($logLine = false !== $logFile->fgets()) {
-            if ($logFile->eof()) {
-                $reachedEof = true;
+        if ($logFile->eof()) {
+            return null;
+        }
 
+        while (($logLine = $logFile->fgets()) !== false) {
+            if (empty($logLine)) {
+                continue;
+            }
+
+            $batchContent .= $logLine;
+
+            if ($batchLinesCount++ === $batchLinesLimit - 1) {
                 break;
             }
 
-            $batchContent .= $logLine . \PHP_EOL;
+            if ($logFile->eof()) {
+                $reachedEof = true;
 
-            if ($batchLinesCount++ >= $batchLinesLimit) {
                 break;
             }
         }

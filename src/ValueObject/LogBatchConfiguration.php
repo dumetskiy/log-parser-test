@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace LogParser\ValueObject;
 
 use Symfony\Component\Stopwatch\Stopwatch;
+use Symfony\Component\Stopwatch\StopwatchEvent;
 
 class LogBatchConfiguration
 {
@@ -12,10 +13,10 @@ class LogBatchConfiguration
 
     public function __construct(
         public readonly ParseOperationConfiguration $parseOperationConfiguration,
-        public readonly int $batchId = 1,
+        public readonly int $batchId = 0,
         public readonly int $startLine = 0,
         public readonly int $linesCount = 0,
-        public readonly string $logLines = '',
+        public string $logLines = '',
         public readonly bool $reachedEof = false
     ) {
         $this->stopwatch = new Stopwatch();
@@ -26,9 +27,9 @@ class LogBatchConfiguration
         $this->stopwatch->start($this->getStopWatchHandle());
     }
 
-    public function endStopWatch(): void
+    public function endStopWatch(): StopwatchEvent
     {
-        $this->stopwatch->stop($this->getStopWatchHandle());
+        return $this->stopwatch->stop($this->getStopWatchHandle());
     }
 
     private function getStopWatchHandle(): string
