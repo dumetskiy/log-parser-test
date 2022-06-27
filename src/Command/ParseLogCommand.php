@@ -74,7 +74,7 @@ class ParseLogCommand extends Command
             $operationConfiguration = $this->operationConfigurationFactory->create(
                 fileName: $input->getArgument(Argument::FILENAME->value),
                 processingStrategyHandle: $input->getOption(Option::LOG_PROCESSING_STRATEGY->value),
-                offset: intval($input->getOption(Option::OFFSET_LINES->value)),
+                offset: (int) ($input->getOption(Option::OFFSET_LINES->value)),
             );
             $this->logger->notice('Configuration gathered successfully!');
 

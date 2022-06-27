@@ -28,7 +28,7 @@ abstract class AbstractApiClient
             $response = $this->httpClient->request($method, $path, $options);
 
             return $response->getContent();
-        } catch (HttpExceptionInterface | TransportExceptionInterface $exception) {
+        } catch (HttpExceptionInterface|TransportExceptionInterface $exception) {
             throw ApiClientException::create(
                 message: sprintf(
                     'An API call at "%s" failed: %s',

@@ -9,7 +9,6 @@ enum LogLineProperty: string
     case DATE_TIME = 'date_time';
     case HTTP_CODE = 'http_code';
     case SERVICE_NAME = 'service_name';
-
     /**
      * @return string[]
      */

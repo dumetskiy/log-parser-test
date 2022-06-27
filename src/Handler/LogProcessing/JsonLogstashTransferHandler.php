@@ -15,7 +15,7 @@ use LogParser\Enum\LogProcessingStrategy;
 class JsonLogstashTransferHandler extends AbstractLogstashTransferHandler
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function prepareRequestOptions(array &$options): void
     {
