@@ -9,8 +9,14 @@ use LogParser\Enum\LogProcessingStrategy;
 use LogParser\ValueObject\LogBatchConfiguration;
 use Psr\Log\LoggerInterface;
 
-#[LogProcessingHandler(LogProcessingStrategy::PARSE_AND_PROXY, 3)]
-#[LogProcessingHandler(LogProcessingStrategy::RAW_LOG_PROXY, 2)]
+#[LogProcessingHandler(
+    logProcessingStrategy: LogProcessingStrategy::PARSE_AND_PROXY,
+    executionOrder: 3
+)]
+#[LogProcessingHandler(
+    logProcessingStrategy: LogProcessingStrategy::RAW_LOG_PROXY,
+    executionOrder: 2
+)]
 class FinishProcessingHandler implements LogProcessingHandlerInterface
 {
     private const SECOND_TO_MILLISECOND_RATIO = 1000;

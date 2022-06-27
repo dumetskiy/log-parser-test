@@ -10,7 +10,10 @@ use Symfony\Component\Finder\SplFileInfo;
 
 class FileSystemUtils
 {
-    public static function listProjectDirectoryFilenames(string $projectDirectory): ?array
+    /**
+     * @return string[] list of files in a directory
+     */
+    public static function listProjectDirectoryFilenames(string $projectDirectory): array
     {
         $finder = new Finder();
         $finder->files()->in(self::buildAbsolutePath($projectDirectory));

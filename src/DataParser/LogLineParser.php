@@ -10,6 +10,9 @@ class LogLineParser
     private const RAW_LOG_REGEX
         = '/(?<service_name>[A-Z\-]*) -.*- \[(?<date_time>[a-zA-Z0-9\/:\s\+]*)\] ".*" (?<http_code>\d*)/';
 
+    /**
+     * @return array<string, string> parsed log line data
+     */
     public function parse(string $rawLogLine): array
     {
         preg_match(self::RAW_LOG_REGEX, $rawLogLine, $logLineData);

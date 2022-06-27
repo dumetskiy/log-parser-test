@@ -11,7 +11,10 @@ use LogParser\Exception\LogParserException;
 use LogParser\ValueObject\LogBatchConfiguration;
 use Psr\Log\LoggerInterface;
 
-#[LogProcessingHandler(LogProcessingStrategy::PARSE_AND_PROXY, 1)]
+#[LogProcessingHandler(
+    logProcessingStrategy: LogProcessingStrategy::PARSE_AND_PROXY,
+    executionOrder: 1
+)]
 class JsonLogNormalizationHandler implements LogProcessingHandlerInterface
 {
     public function __construct(

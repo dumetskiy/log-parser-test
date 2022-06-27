@@ -74,7 +74,7 @@ class ParseLogCommand extends Command
             $operationConfiguration = $this->operationConfigurationFactory->create(
                 fileName: $input->getArgument(Argument::FILENAME->value),
                 processingStrategyHandle: $input->getOption(Option::LOG_PROCESSING_STRATEGY->value),
-                offset: (int) $input->getOption(Option::OFFSET_LINES->value),
+                offset: intval($input->getOption(Option::OFFSET_LINES->value)),
             );
             $this->logger->notice('Configuration gathered successfully!');
 
@@ -83,8 +83,7 @@ class ParseLogCommand extends Command
             return self::SUCCESS;
         } catch (LogParserException $exception) {
             $this->logger->error($exception->getMessage());
-        } catch (\Throwable $throwable) {
-            throw $throwable;
+        } catch (\Throwable) {
             $this->logger->error('Unhandled error occurred');
         }
 

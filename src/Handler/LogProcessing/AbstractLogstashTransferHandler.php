@@ -4,25 +4,23 @@ declare(strict_types=1);
 
 namespace LogParser\Handler\LogProcessing;
 
+use LogParser\ApiClient\LogStashApiClient;
+use LogParser\Exception\Http\ApiClientException;
 use LogParser\Exception\Http\LogStashCommunicationException;
 use LogParser\ValueObject\LogBatchConfiguration;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 abstract class AbstractLogstashTransferHandler implements LogProcessingHandlerInterface
 {
     public function __construct(
         readonly private LoggerInterface $logger,
-        readonly private HttpClientInterface $logstashClient,
+        readonly private LogStashApiClient $logstashClient,
     ) {}
 
-    public function prepareRequestOptions(array &$options): void
-    {
-        // Implement any request options mutations here
-    }
+    /**
+     * @param array<string, mixed> $options API request options
+     */
+    abstract public function prepareRequestOptions(array &$options): void;
 
     public function __invoke(LogBatchConfiguration $logBatchConfiguration): void
     {
@@ -34,18 +32,9 @@ abstract class AbstractLogstashTransferHandler implements LogProcessingHandlerIn
 
             $this->prepareRequestOptions($requestOptions);
 
-            $response = $this->logstashClient->request(Request::METHOD_POST, '/', $requestOptions);
-
-            if (Response::HTTP_OK !== $response->getStatusCode()) {
-                throw LogStashCommunicationException::create(sprintf(
-                    'Logstash send logs call resulted in %d status code',
-                    $response->getStatusCode()
-                ));
-            }
-        } catch (TransportExceptionInterface) {
-            throw LogStashCommunicationException::create(
-                'Failed to send logs to LogStash'
-            );
+            $this->logstashClient->postLogstashLogs($requestOptions);
+        } catch (ApiClientException) {
+            throw LogStashCommunicationException::create('Failed to send logs to LogStash');
         }
     }
 }

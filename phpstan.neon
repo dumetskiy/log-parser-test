@@ -5,10 +5,12 @@ includes:
     - vendor/phpstan/phpstan-deprecation-rules/rules.neon
 
 parameters:
-    level: 3
+    level: 8
     fileExtensions: [php]
     paths:
         - src
     excludePaths:
         - src/tests/*
     inferPrivatePropertyTypeFromConstructor: true
+    ignoreErrors:
+        - '#^If condition is always false.$#'

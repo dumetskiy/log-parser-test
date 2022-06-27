@@ -28,6 +28,7 @@ class LogHandlerStackFactoryCompilerPass implements CompilerPassInterface
 
         foreach ($container->findTaggedServiceIds('log_parser.processing.handler') as $handlerId => $tags) {
             $handlerDefinition = $container->getDefinition($handlerId);
+            /** @phpstan-ignore-next-line */
             $handlerClassReflection = new \ReflectionClass($handlerDefinition->getClass());
 
             foreach ($handlerClassReflection->getAttributes() as $attributeReflection) {

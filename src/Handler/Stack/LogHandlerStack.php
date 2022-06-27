@@ -8,8 +8,14 @@ use LogParser\Enum\LogProcessingStrategy;
 use LogParser\Exception\Configuration\LogParserConfigurationException;
 use LogParser\Handler\LogProcessing\LogProcessingHandlerInterface;
 
-class LogHandlerStack implements \IteratorAggregate
+/**
+ * @implements \IteratorAggregate<LogProcessingHandlerInterface>
+ */
+class LogHandlerStack implements \IteratorAggregate, \Countable
 {
+    /**
+     * @param LogProcessingHandlerInterface[] $handlers
+     */
     public function __construct(
         readonly private LogProcessingStrategy $processingStrategy,
         private array $handlers = []
@@ -35,5 +41,10 @@ class LogHandlerStack implements \IteratorAggregate
 
     public function getIterator(): \Traversable {
         return new \ArrayIterator($this->handlers);
+    }
+
+    public function count(): int
+    {
+        return count($this->handlers);
     }
 }

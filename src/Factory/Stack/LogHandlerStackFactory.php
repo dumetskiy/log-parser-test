@@ -10,6 +10,9 @@ use LogParser\Handler\Stack\LogHandlerStack;
 
 class LogHandlerStackFactory
 {
+    /**
+     * @var array<string, LogHandlerStack> the strategy-handlerStack map
+     */
     private array $handlerStacks = [];
 
     public function pushStackHandler(

@@ -9,8 +9,14 @@ use LogParser\Enum\LogProcessingStrategy;
 use LogParser\ValueObject\LogBatchConfiguration;
 use Psr\Log\LoggerInterface;
 
-#[LogProcessingHandler(LogProcessingStrategy::PARSE_AND_PROXY, 0)]
-#[LogProcessingHandler(LogProcessingStrategy::RAW_LOG_PROXY, 0)]
+#[LogProcessingHandler(
+    logProcessingStrategy: LogProcessingStrategy::PARSE_AND_PROXY,
+    executionOrder: 0
+)]
+#[LogProcessingHandler(
+    logProcessingStrategy: LogProcessingStrategy::RAW_LOG_PROXY,
+    executionOrder: 0
+)]
 class InitProcessingHandler implements LogProcessingHandlerInterface
 {
     public function __construct(
