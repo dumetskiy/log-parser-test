@@ -6,7 +6,7 @@ namespace LogParser\Exception\Configuration;
 
 use LogParser\Exception\LogParserException;
 
-class LogParserConfigurationException extends LogParserException
+class ConfigurationException extends LogParserException
 {
     protected static string $defaultMessage = 'Configuration error occurred';
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace LogParser\Processor;
 
-use LogParser\Exception\Configuration\LogParserConfigurationException;
+use LogParser\Exception\Configuration\ConfigurationException;
 use LogParser\Factory\Stack\LogHandlerStackFactory;
 use LogParser\Factory\ValueObject\LogBatchConfigurationFactory;
 use LogParser\Handler\LogProcessing\LogProcessingHandlerInterface;
@@ -41,7 +41,7 @@ class LogParseOperationProcessor
 
         if (!count($handlerStack)) {
             // We need to make sure there is at least one handler configured for the given strategy
-            throw LogParserConfigurationException::create(sprintf(
+            throw ConfigurationException::create(sprintf(
                 'There are no handlers configured for strategy "%s"',
                 $operationConfiguration->processingStrategy->value
             ));

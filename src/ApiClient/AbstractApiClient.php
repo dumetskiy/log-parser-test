@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace LogParser\ApiClient;
 
+use LogParser\DTO\ApiClient\ApiResponseDTO;
 use LogParser\Exception\Http\ApiClientException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Contracts\HttpClient\Exception\HttpExceptionInterface;
@@ -23,11 +24,19 @@ abstract class AbstractApiClient
         string $path = self::DEFAULT_PATH,
         string $method = Request::METHOD_GET,
         array $options = []
-    ): string {
+    ): ApiResponseDTO {
         try {
+            if (isset($options['body']) && is_array($options['body'])) {
+                $options['body'] = json_encode($options['body'], JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES);
+            }
+
             $response = $this->httpClient->request($method, $path, $options);
 
-            return $response->getContent();
+            return new ApiResponseDTO(
+                code: $response->getStatusCode(),
+                content: $response->getContent(false),
+                headers: $response->getHeaders(false)
+            );
         } catch (HttpExceptionInterface|TransportExceptionInterface $exception) {
             throw ApiClientException::create(
                 message: sprintf(

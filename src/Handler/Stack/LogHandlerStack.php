@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace LogParser\Handler\Stack;
 
 use LogParser\Enum\LogProcessingStrategy;
-use LogParser\Exception\Configuration\LogParserConfigurationException;
+use LogParser\Exception\Configuration\ConfigurationException;
 use LogParser\Handler\LogProcessing\LogProcessingHandlerInterface;
 
 /**
@@ -24,7 +24,7 @@ class LogHandlerStack implements \IteratorAggregate, \Countable
     public function pushHandler(LogProcessingHandlerInterface $handler, int $order): void
     {
         if (isset($this->handlers[$order])) {
-            throw LogParserConfigurationException::create(sprintf(
+            throw ConfigurationException::create(sprintf(
                 'Duplicate handler order %d for stack "%s" [%s | %s]',
                 $order,
                 $this->processingStrategy->value,
