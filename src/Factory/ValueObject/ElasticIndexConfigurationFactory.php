@@ -10,12 +10,14 @@ class ElasticIndexConfigurationFactory
 {
     /**
      * @param array<string, mixed> $configurationData
+     *
      * @return ElasticIndexConfiguration[]
      */
     final public function buildFromConfigurationData(array $configurationData): array
     {
         $indexesConfigurationData = $configurationData['indexes'] ?? [];
 
+        /* @phpstan-ignore-next-line */
         return array_map(fn (string $index) => new ElasticIndexConfiguration(
             index: $index,
             configuration: $indexesConfigurationData[$index]

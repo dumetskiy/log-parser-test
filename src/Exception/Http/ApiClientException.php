@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace LogParser\Exception\Http;
 
 use LogParser\Exception\LogParserException;
-use Symfony\Component\HttpFoundation\Response;
 
 class ApiClientException extends LogParserException
 {

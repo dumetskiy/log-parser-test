@@ -30,13 +30,12 @@ class ElasticSchemaInitCommand extends Command
         try {
             $this->logger->notice('Setting up elastic indexes and mappings...');
             $this->elasticManager->initElasticSchema();
-            $this->logger->notice('Configuration gathered successfully!');
+            $this->logger->notice('Elastic schema initialized successfully!');
 
             return self::SUCCESS;
         } catch (LogParserException $exception) {
             $this->logger->error($exception->getMessage());
         } catch (\Throwable $throwable) {
-            throw $throwable;
             $this->logger->error('Unhandled error occurred');
         }
 
