@@ -7,8 +7,12 @@ namespace LogParser\Controller\Api;
 use LogParser\Converter\RequestQueryDataParamConverter;
 use LogParser\DTO\Api\Request\LogCountRequestDTO;
 use LogParser\DTO\Api\Request\LogCountResponseDTO;
+use LogParser\DTO\Api\Response\Error\ApiErrorResponseDTO;
+use LogParser\DTO\Api\Response\Error\ConstraintViolationErrorDTO;
+use LogParser\DTO\Api\Response\Error\ErrorDTO;
 use LogParser\Exception\LogParserException;
 use LogParser\Manager\ElasticManager;
+use Nelmio\ApiDocBundle\Annotation\Model;
 use OpenApi\Attributes as OA;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
@@ -73,11 +77,27 @@ class LogsApiController extends BaseApiController
         OA\Response(
             response: Response::HTTP_OK,
             description: 'count of matching results',
-            content: new OA\JsonContent(type: 'array', items: new OA\Items(type: 'string'))
+            content: new OA\JsonContent(type: 'object', ref: new Model(type: LogCountResponseDTO::class))
         ),
         OA\Response(
             response: Response::HTTP_BAD_REQUEST,
-            description: 'bad input parameter'
+            description: 'bad input parameter',
+            content: new OA\JsonContent(
+                type: 'object',
+                ref: new Model(type: ApiErrorResponseDTO::class),
+                example: new ApiErrorResponseDTO([
+                    new ConstraintViolationErrorDTO('error_message', 'error_source'),
+                ]))
+        ),
+        OA\Response(
+            response: Response::HTTP_INTERNAL_SERVER_ERROR,
+            description: 'internal server error',
+            content: new OA\JsonContent(
+                type: 'object',
+                ref: new Model(type: ApiErrorResponseDTO::class),
+                example: new ApiErrorResponseDTO([
+                    new ErrorDTO('error_message', 100),
+                ]))
         ),
         OA\Tag('analytics')
     ]

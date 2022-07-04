@@ -69,7 +69,8 @@
     ],
     "cs-fix": "./bin/php-cs-fix",
     "cs-check": "./bin/php-cs-check",
-    "phpstan-analyse": "./bin/phpstan-analyse"
+    "phpstan-analyse": "./bin/phpstan-analyse",
+    "phpunit": "./bin/phpunit"
   },
   "conflict": {
     "symfony/symfony": "*"

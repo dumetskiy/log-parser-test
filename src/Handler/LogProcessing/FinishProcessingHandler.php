@@ -31,13 +31,13 @@ class FinishProcessingHandler implements LogProcessingHandlerInterface
         $processingEvent = $logBatchConfiguration->endStopWatch();
 
         $this->logger->notice(sprintf(
-            'Batch %d [lines %d-%d] processed in %s sec, %sMB used. Offset: %d',
+            'Batch %d [lines %s-%s] processed in %s sec, %sMB used. Offset: %s',
             $logBatchConfiguration->batchId,
-            $logBatchConfiguration->startLine,
-            $logBatchConfiguration->getBatchEndLine(),
+            number_format($logBatchConfiguration->startLine, thousands_separator: ' '),
+            number_format($logBatchConfiguration->getBatchEndLine(), thousands_separator: ' '),
             number_format($processingEvent->getDuration() / self::SECOND_TO_MILLISECOND_RATIO, 3),
             number_format($processingEvent->getMemory() / self::BYTE_TO_MEGABYTE_RATIO, 1),
-            $logBatchConfiguration->getBatchEndLine()
+            number_format($logBatchConfiguration->getBatchEndLine(), thousands_separator: ' ')
         ));
     }
 }

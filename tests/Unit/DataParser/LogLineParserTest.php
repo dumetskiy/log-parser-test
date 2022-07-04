@@ -40,7 +40,7 @@ class LogLineParserTest extends TestCase
             ['USER-SERVICE - - "17/Aug/2021:09:21:53 +0000" "POST /users HTTP/1.1" 201'],
             ['USER-SERVICE - - "17/Aug/2021:09:21:53 +0000" POST /users HTTP/1.1 201'],
             ['USER-SERVICE - - "17/Aug/2021:09:21:53 +0000" POST /users HTTP/1.1 CODE'],
-            ['$pec!al_ch*r$ - - "17/Aug/2021:09:21:53 +0000" POST /users HTTP/1.1 CODE']
+            ['$pec!al_ch*r$ - - "17/Aug/2021:09:21:53 +0000" POST /users HTTP/1.1 CODE'],
         ];
     }
 
@@ -53,7 +53,7 @@ class LogLineParserTest extends TestCase
                     'service_name' => 'USER-SERVICE',
                     'date_time' => '17/Aug/2021:09:21:53 +0000',
                     'http_code' => '201',
-                ]
+                ],
             ],
             [
                 'INVOICE-SERVICE - - [17/Aug/2021:09:22:59 +0000] "POST /invoices HTTP/1.1" 400',
@@ -61,7 +61,7 @@ class LogLineParserTest extends TestCase
                     'service_name' => 'INVOICE-SERVICE',
                     'date_time' => '17/Aug/2021:09:22:59 +0000',
                     'http_code' => '400',
-                ]
+                ],
             ],
             [
                 'DELTA - - [09/Sep/2001:01:47:34 +0000] "POST value-62c28a3aa54be" 203',
@@ -69,8 +69,8 @@ class LogLineParserTest extends TestCase
                     'service_name' => 'DELTA',
                     'date_time' => '09/Sep/2001:01:47:34 +0000',
                     'http_code' => '203',
-                ]
-            ]
+                ],
+            ],
         ];
     }
 }

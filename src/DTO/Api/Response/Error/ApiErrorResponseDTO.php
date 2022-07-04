@@ -11,7 +11,7 @@ class ApiErrorResponseDTO
     public readonly bool $error;
 
     /**
-     * @param ApiErrorInterface[] $errors
+     * @param ErrorDTO[]|ConstraintViolationErrorDTO[] $errors
      */
     public function __construct(public readonly array $errors = [])
     {

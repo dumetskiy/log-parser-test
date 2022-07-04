@@ -41,14 +41,14 @@ class ElasticQueryFactoryTest extends TestCase
                     ['bool' => [
                         'should' => [
                             ['match' => ['service_name' => ['query' => 'name-a']]],
-                            ['match' => ['service_name' => ['query' => 'name-b']]]
-                        ]
+                            ['match' => ['service_name' => ['query' => 'name-b']]],
+                        ],
                     ]],
                     ['range' => [
-                        'date_time' => ['gte' => '01/Jan/2022:00:00:00 +0000', 'lte' => '01/Jan/2022:23:59:59 +0000']]
-                    ]
-                ]
-            ]
+                        'date_time' => ['gte' => '01/Jan/2022:00:00:00 +0000', 'lte' => '01/Jan/2022:23:59:59 +0000'], ],
+                    ],
+                ],
+            ],
         ];
     }
 }
