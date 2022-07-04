@@ -13,3 +13,7 @@
 # PHP-cs-fixer
 .php-cs-fixer.php
 .php-cs-fixer.cache
+###> phpunit/phpunit ###
+/phpunit.xml
+.phpunit.result.cache
+###< phpunit/phpunit ###

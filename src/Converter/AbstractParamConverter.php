@@ -12,7 +12,7 @@ abstract class AbstractParamConverter implements ParamConverterInterface, LogPar
 {
     public const CONVERTER_NAME = '';
 
-    public function supports(ParamConverter $configuration)
+    public function supports(ParamConverter $configuration): bool
     {
         return null !== $configuration->getClass() && static::CONVERTER_NAME === $configuration->getConverter();
     }

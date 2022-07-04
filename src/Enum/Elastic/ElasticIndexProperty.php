@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace LogParser\Enum;
+namespace LogParser\Enum\Elastic;
 
 enum ElasticIndexProperty: string
 {

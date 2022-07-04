@@ -8,7 +8,7 @@ use Erichard\ElasticQueryBuilder\Query\BoolQuery;
 use Erichard\ElasticQueryBuilder\Query\MatchQuery;
 use Erichard\ElasticQueryBuilder\Query\RangeQuery;
 use LogParser\DTO\Api\Request\LogCountRequestDTO;
-use LogParser\Enum\ElasticIndexProperty;
+use LogParser\Enum\Elastic\ElasticIndexProperty;
 
 class ElasticQueryFactory
 {

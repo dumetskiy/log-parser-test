@@ -32,7 +32,8 @@
     "phpstan/phpstan": "1.8.x-dev",
     "phpstan/phpstan-deprecation-rules": "1.1.x-dev",
     "phpstan/phpstan-phpunit": "1.1.x-dev",
-    "phpstan/phpstan-symfony": "1.2.x-dev"
+    "phpstan/phpstan-symfony": "1.2.x-dev",
+    "phpunit/phpunit": "10.0.x-dev"
   },
   "config": {
     "optimize-autoloader": true,
