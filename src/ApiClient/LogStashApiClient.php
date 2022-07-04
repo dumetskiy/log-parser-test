@@ -21,7 +21,7 @@ class LogStashApiClient extends AbstractApiClient
      */
     public function postLogstashLogs(array $options): void
     {
-        $logstashResponse = $this->callApi(
+        $this->callApi(
             method: Request::METHOD_POST,
             options: $options
         );

@@ -38,8 +38,6 @@ class BaseApiController extends AbstractFOSRestController
         \Exception $exception,
         int $responseCode = Response::HTTP_INTERNAL_SERVER_ERROR
     ): View {
-        $constraintViolationErrors = [];
-
         $errorResponse = new ApiErrorResponseDTO(
             errors: [new ErrorDTO($exception->getMessage(), $exception->getCode())]
         );
