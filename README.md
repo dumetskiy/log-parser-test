@@ -12,7 +12,7 @@
 
 1. Clone the repository: `git clone https://github.com/dumetskiy/log-parser-test.git`
 2. Make sure you have docker (with compose) installed on your machine
-3. Inside the project directory make a copy of a default `.env` file: `cp e.nv .env.local`
+3. Inside the project directory make a copy of a default `.env` file: `cp .env .env.local`
 4. Build the application using `./docker/build.sh local`
 5. Start application containers using `./docker/start.sh local`
 6. Get into the PHP-FPM container by executing `docker exec -it parser.php-fpm sh`
@@ -39,9 +39,9 @@ All logs are being stored in `logs` elastic index.
 
 For the convenience of use Kibana was installed and configured (available on `http://127.0.0.1:5601` by default).
 
-You can access Elastic and LogStash monitoring details at `http://127.0.0.1:5601/app/monitoring`
+You can access ElasticSearch and LogStash monitoring details at `http://127.0.0.1:5601/app/monitoring`
 
-Elastic console is available at `http://127.0.0.1:5601/app/dev_tools#/console` (in case you will decide to remove the index)
+Elastic console is available at `http://127.0.0.1:5601/app/dev_tools#/console` (in case you will decide to remove or inspect the index)
 
 The command call structure is `log-parser:parse [--strategy [STRATEGY]] [--offset [OFFSET]] [--] <filename>` where:
 
