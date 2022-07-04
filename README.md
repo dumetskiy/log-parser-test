@@ -168,7 +168,8 @@ The data is being loaded from the file, transformed into the `ElasticIndexConfig
 and sent to ElasticSearch using the scoped HttpClient wrapped into `ElasticApiClient`
 
 ### Log analytics API
-In order to expose a Swagger UI and create a self-documenting API endpoint, the NelmioApiDocBundle is used. 
+In order to expose a Swagger UI and create a self-documenting API endpoint, the NelmioApiDocBundle is used.
+By default, Swagger UI is available at `127.0.0.1:8899`
 
 The documentation is configured with PHP8 attributes.
 
