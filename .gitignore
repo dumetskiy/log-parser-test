@@ -9,6 +9,7 @@
 # Symfony
 /var/
 /vendor/
+/public/bundles
 
 # PHP-cs-fixer
 .php-cs-fixer.php
