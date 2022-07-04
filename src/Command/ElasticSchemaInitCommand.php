@@ -35,7 +35,7 @@ class ElasticSchemaInitCommand extends Command
             return self::SUCCESS;
         } catch (LogParserException $exception) {
             $this->logger->error($exception->getMessage());
-        } catch (\Throwable $throwable) {
+        } catch (\Throwable) {
             $this->logger->error('Unhandled error occurred');
         }
 

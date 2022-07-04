@@ -70,6 +70,7 @@ services:
         read_only: true
     ports:
       - ${LOGSTASH_PORT:-5010}:5010
+      - 9600:9600
     env_file:
       - .env
     networks:

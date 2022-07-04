@@ -8,4 +8,5 @@ enum HttpHeaderValue: string
 {
     case CONTENT_TYPE_RAW_LOG = 'application/raw-log';
     case CONTENT_TYPE_JSON_LOG = 'application/json-lines';
+    case CONTENT_TYPE_JSON = 'application/json';
 }

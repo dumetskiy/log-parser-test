@@ -33,7 +33,7 @@ abstract class AbstractLogstashTransferHandler implements LogProcessingHandlerIn
             $this->prepareRequestOptions($requestOptions);
 
             $this->logstashClient->postLogstashLogs($requestOptions);
-        } catch (ApiClientException) {
+        } catch (ApiClientException $exception) {
             throw LogStashCommunicationException::create('Failed to send logs to LogStash');
         }
     }

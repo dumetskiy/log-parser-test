@@ -12,6 +12,11 @@ framework:
         scoped_clients:
             logstash.client:
                 base_uri: '%log_parser.logstash.address%'
+                retry_failed:
+                    http_codes: [429]
+                    max_retries: 10
+                    delay: 1000
+                    multiplier: 2
             elastic.client:
                 base_uri: '%log_parser.elastic.address%'
 

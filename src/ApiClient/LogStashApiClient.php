@@ -5,12 +5,15 @@ declare(strict_types=1);
 namespace LogParser\ApiClient;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class LogStashApiClient extends AbstractApiClient
 {
-    public function __construct(HttpClientInterface $logstashClient) {
+    public function __construct(HttpClientInterface $logstashClient, SerializerInterface $serializer) {
         $this->httpClient = $logstashClient;
+
+        parent::__construct($serializer);
     }
 
     /**
@@ -18,7 +21,7 @@ class LogStashApiClient extends AbstractApiClient
      */
     public function postLogstashLogs(array $options): void
     {
-        $this->callApi(
+        $logstashResponse = $this->callApi(
             method: Request::METHOD_POST,
             options: $options
         );

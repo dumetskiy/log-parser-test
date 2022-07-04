@@ -5,7 +5,12 @@
   "minimum-stability": "dev",
   "require": {
     "php": ">=8.1",
+    "erichard/elasticsearch-query-builder": "^3.0@beta",
+    "friendsofsymfony/rest-bundle": "^3.1@dev",
+    "nelmio/api-doc-bundle": "4.9.*",
     "phpdocumentor/reflection-docblock": "5.x-dev",
+    "sensio/framework-extra-bundle": "^6.2",
+    "symfony/asset": "6.2.*",
     "symfony/console": "6.2.*",
     "symfony/dotenv": "6.2.*",
     "symfony/finder": "6.2.*",
@@ -17,11 +22,14 @@
     "symfony/runtime": "6.2.*",
     "symfony/serializer": "6.2.*",
     "symfony/stopwatch": "6.2.*",
-    "symfony/yaml": "6.2.*"
+    "symfony/twig-bundle": "6.2.*",
+    "symfony/validator": "6.2.*",
+    "symfony/yaml": "6.2.*",
+    "zircote/swagger-php": "4.x-dev"
   },
   "require-dev": {
     "friendsofphp/php-cs-fixer": "dev-master",
-    "phpstan/phpstan": "1.7.x-dev",
+    "phpstan/phpstan": "1.8.x-dev",
     "phpstan/phpstan-deprecation-rules": "1.1.x-dev",
     "phpstan/phpstan-phpunit": "1.1.x-dev",
     "phpstan/phpstan-symfony": "1.2.x-dev"

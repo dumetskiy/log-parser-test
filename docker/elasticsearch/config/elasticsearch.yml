@@ -1,6 +1,7 @@
 ---
 cluster.name: "parser-cluster"
 network.host: 0.0.0.0
+
 xpack.security.enabled: false
 xpack.monitoring.collection.enabled: true
 xpack.security.enrollment.enabled: true

@@ -24,40 +24,44 @@ class LogBatchConfigurationFactory
         LogBatchConfiguration $currentBatch,
         int $batchLinesLimit
     ): ?LogBatchConfiguration {
-        $batchLinesCount = 0;
-        $logFile = $currentBatch->parseOperationConfiguration->logFile;
-        $batchContent = '';
-        $reachedEof = false;
-
-        if ($logFile->eof()) {
-            return null;
-        }
-
-        while (($logLine = $logFile->fgets()) !== false) {
-            if (empty($logLine)) {
-                continue;
-            }
-
-            $batchContent .= $logLine;
-
-            if ($batchLinesCount++ === $batchLinesLimit - 1) {
-                break;
-            }
+        try {
+            $batchLinesCount = 0;
+            $logFile = $currentBatch->parseOperationConfiguration->logFile;
+            $batchContent = '';
+            $reachedEof = false;
 
             if ($logFile->eof()) {
-                $reachedEof = true;
-
-                break;
+                return null;
             }
-        }
 
-        return new LogBatchConfiguration(
-            parseOperationConfiguration: $currentBatch->parseOperationConfiguration,
-            batchId: $currentBatch->batchId + 1,
-            startLine: $currentBatch->startLine + $currentBatch->linesCount,
-            linesCount: $batchLinesCount,
-            logLines: $batchContent,
-            reachedEof: $reachedEof
-        );
+            while (($logLine = $logFile->fgets()) !== false) {
+                if (empty($logLine)) {
+                    continue;
+                }
+
+                $batchContent .= $logLine;
+
+                if ($batchLinesCount++ === $batchLinesLimit - 1) {
+                    break;
+                }
+
+                if ($logFile->eof()) {
+                    $reachedEof = true;
+
+                    break;
+                }
+            }
+
+            return new LogBatchConfiguration(
+                parseOperationConfiguration: $currentBatch->parseOperationConfiguration,
+                batchId: $currentBatch->batchId + 1,
+                startLine: $currentBatch->startLine + $currentBatch->linesCount,
+                linesCount: $batchLinesCount,
+                logLines: $batchContent,
+                reachedEof: $reachedEof
+            );
+        } catch (\RuntimeException) {
+            return null;
+        }
     }
 }

@@ -2,3 +2,8 @@
 http.host: 0.0.0.0
 xpack.monitoring.elasticsearch.hosts: [ "http://elasticsearch:9200" ]
 config.support_escapes: true
+
+queue.type: persisted
+queue.drain: true
+queue.max_events: 2
+queue.max_bytes: 300mb

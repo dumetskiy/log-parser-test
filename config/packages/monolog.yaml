@@ -7,13 +7,11 @@ monolog:
             path: "%kernel.logs_dir%/log-parser.%kernel.environment%.log"
             level: debug
             channels: ["!event"]
-
-        # Configuring logger to output logs into console even with a normal verbosity level
         console:
             type: console
             process_psr_3_messages: true
             level: info
-            channels: ["!event", "!console", "!http_client"]
+            channels: ["!event", "!console"]
             verbosity_levels:
                 VERBOSITY_NORMAL: NOTICE
                 VERBOSITY_VERBOSE: INFO

@@ -10,9 +10,9 @@ class ApiResponse
     private const RESPONSE_CODE_GROUP_RANGE = 100;
 
     /**
-     * @var array<string, mixed>
+     * @var array<string, mixed>|null
      */
-    private array $data;
+    private ?array $data;
 
     /**
      * @param array<array<string>>|null $headers

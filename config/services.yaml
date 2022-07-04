@@ -1,9 +1,11 @@
 parameters:
-    log_parser.configuration.parsing.batch_size: 2
+    log_parser.configuration.parsing.batch_size: 10000
     log_parser.configuration.filesystem.logs_directory: data
 
     log_parser.logstash.address: '%env(string:LOGSTASH_ADDRESS)%'
     log_parser.elastic.address: '%env(string:ELASTIC_ADDRESS)%'
+
+    log_parser.elastic.index_name: 'logs'
 services:
     _defaults:
         autowire: true
@@ -11,6 +13,11 @@ services:
     _instanceof:
         LogParser\Handler\LogProcessing\LogProcessingHandlerInterface:
             tags: ['log_parser.processing.handler']
+        LogParser\Converter\ParamConverterInterface:
+            tags:
+                -
+                    name: 'request.param_converter'
+                    converter: 'log_parser.converter.query_data'
 
     LogParser\:
         resource: '../src/'
