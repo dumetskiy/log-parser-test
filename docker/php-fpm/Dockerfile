@@ -1,25 +1,16 @@
 FROM php:8.1.1-fpm-alpine
 
-ARG USER=www-data
-ARG UID=1000
-
-RUN if [ $USER != "www-data" ]; then \
-    addgroup -g ${UID} -S ${USER} \
-    && adduser -D -H -u ${UID} -s /bin/bash ${USER} -G ${USER}; \
-fi;
+RUN apk add acl
 
 WORKDIR /app
-USER root
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-RUN apk update \
-    && apk add  --no-cache git curl \
-    && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
-    && rm -rf /tmp/* \
-    && docker-php-source extract
+# https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
+ENV COMPOSER_ALLOW_SUPERUSER=1
 
-COPY --chown=${USER}:${USER} . .
-USER ${USER}
-
-CMD ["php-fpm", "-F"]
-
-EXPOSE 9000
+RUN set -eux; \
+	composer clear-cache
+ENV PATH="${PATH}:/root/.composer/vendor/bin"
+ENV APP_ENV=dev
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint
+RUN chmod +x /usr/local/bin/docker-entrypoint

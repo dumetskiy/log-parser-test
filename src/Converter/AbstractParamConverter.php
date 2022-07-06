@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection PhpCSFixerValidationInspection */
 
 declare(strict_types=1);
 

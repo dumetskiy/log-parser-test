@@ -28,6 +28,7 @@ services:
       - .env
     networks:
       - parser-network
+    command: '/usr/local/bin/docker-entrypoint'
 
   elasticsearch:
     container_name: parser.elasticsearch
