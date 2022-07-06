@@ -6,10 +6,10 @@ namespace LogParser\Controller\Api;
 
 use LogParser\Converter\RequestQueryDataParamConverter;
 use LogParser\DTO\Api\Request\LogCountRequestDTO;
-use LogParser\DTO\Api\Response\LogCountResponseDTO;
 use LogParser\DTO\Api\Response\Error\ApiErrorResponseDTO;
 use LogParser\DTO\Api\Response\Error\ConstraintViolationErrorDTO;
 use LogParser\DTO\Api\Response\Error\ErrorDTO;
+use LogParser\DTO\Api\Response\LogCountResponseDTO;
 use LogParser\Exception\LogParserException;
 use LogParser\Manager\ElasticManager;
 use Nelmio\ApiDocBundle\Annotation\Model;
