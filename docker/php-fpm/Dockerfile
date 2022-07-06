@@ -11,6 +11,5 @@ ENV COMPOSER_ALLOW_SUPERUSER=1
 RUN set -eux; \
 	composer clear-cache
 ENV PATH="${PATH}:/root/.composer/vendor/bin"
-ENV APP_ENV=dev
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 RUN chmod +x /usr/local/bin/docker-entrypoint
